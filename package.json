@@ -1,0 +1,17 @@
+{
+  "name": "sioslife-desktop-wallpaper",
+  "version": "1.0.0",
+  "description": "desktop wallpaper downloader",
+  "main": "index.js",
+  "scripts": { },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zpr-sioslife/sioslife-desktop-wallpaper.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zpr-sioslife/sioslife-desktop-wallpaper/issues"
+  },
+  "homepage": "https://github.com/zpr-sioslife/sioslife-desktop-wallpaper#readme"
+}
