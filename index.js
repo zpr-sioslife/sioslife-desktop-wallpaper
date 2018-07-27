@@ -57,6 +57,9 @@ function createWindow() {
     return;
   }
 
+  autoUpdater.logger = require("electron-log");
+  autoUpdater.logger.transports.file.level = "info";
+  autoUpdater.autoDownload = false;
   autoUpdater.checkForUpdatesAndNotify();
 }
 
