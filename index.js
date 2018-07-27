@@ -2,6 +2,9 @@ const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
+const { autoUpdater } = require("electron-updater");
+
+autoUpdater.checkForUpdatesAndNotify();
 
 if (isDev)
   require('electron-reloader')(module);

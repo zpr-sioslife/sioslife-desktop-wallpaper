@@ -26,6 +26,7 @@
   "dependencies": {
     "electron-dl": "anyTV/electron-dl",
     "electron-is-dev": "^0.3.0",
+    "electron-updater": "^3.0.3",
     "fs-extra": "^7.0.0",
     "he": "^1.1.1",
     "node-fetch": "^2.2.0"
