@@ -10,6 +10,8 @@
     "dev:build": "parcel watch src/renderer/index.html -d ./build --public-url ./ --target=electron",
     "dev:start": "wait-on ./build/index.html && electron .",
     "build": "npm-run-all clean build:*",
+    "build:ci:win": "npm-run-all build:bundle \"build:pkg -- --publish always --win\"",
+    "build:ci:mac": "npm-run-all build:bundle \"build:pkg -- --publish always --mac\"",
     "build:bundle": "parcel build src/renderer/index.html -d ./build --public-url ./ --target=electron",
     "build:pkg": "electron-builder"
   },

@@ -4,8 +4,6 @@ const url = require('url');
 const isDev = require('electron-is-dev');
 const { autoUpdater } = require("electron-updater");
 
-autoUpdater.checkForUpdatesAndNotify();
-
 if (isDev)
   require('electron-reloader')(module);
 
@@ -58,6 +56,8 @@ function createWindow() {
     app.quit();
     return;
   }
+
+  autoUpdater.checkForUpdatesAndNotify();
 }
 
 // This method will be called when Electron has finished
