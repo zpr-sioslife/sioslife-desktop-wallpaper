@@ -3,11 +3,15 @@
     <head>
       <meta charset="UTF-8">
       <title>SiosLIFE Desktop Wallpaper</title>
+      <script src="main.js"></script>
     </head>
     <body>
-      <h1>SiosLIFE Desktop Wallpaper</h1>
+      <h1>SiosLIFE Desktop Wallpaper <script>document.write('v' + require('../package.json').version)</script></h1>
       We are using node <script>document.write(process.versions.node)</script>,
       Chrome <script>document.write(process.versions.chrome)</script>,
       and Electron <script>document.write(process.versions.electron)</script>.
+      <br><br>
+      <button id="download-btn">Download Images</button>
+      <div id="log"></div>
     </body>
   </html>

@@ -1,4 +1,4 @@
-const { app, BrowserWindow } = require('electron')
+const { app, BrowserWindow, ipcMain } = require('electron');
 const path = require('path');
 const url = require('url');
 const isDev = require('electron-is-dev');
@@ -6,13 +6,16 @@ const isDev = require('electron-is-dev');
 if (isDev)
   require('electron-reloader')(module);
 
+// initialize main node file
+require('./src/main-process/main-process');
+
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win
 
 function createWindow() {
   // Create the browser window.
-  const winOptions = { width: isDev ? 1200 : 800, height: isDev ? 800 : 600 };
+  const winOptions = { width: isDev ? 1700 : 800, height: isDev ? 900 : 600 };
   win = new BrowserWindow(winOptions);
 
   // and load the index.html of the app.
