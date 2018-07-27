@@ -1,7 +1,12 @@
 import { ipcRenderer } from 'electron';
+const pkg = require('../../package.json');
 
 const init = () => {
   const logEl = document.getElementById('log');
+
+  document
+    .getElementById('version')
+    .innerHTML = 'v' + pkg.version;
 
   document
     .getElementById("download-btn")

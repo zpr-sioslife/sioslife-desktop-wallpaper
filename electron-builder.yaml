@@ -1,0 +1,16 @@
+productName: SiosDeskPaper
+asar: true
+files:
+  - index.js
+  - build/**/*
+  - src/main-process/**/*
+win:
+  target: 
+    - target: nsis
+      arch: x64
+  artifactName: ${productName}.${ext}
+mac:
+  type: development
+  target: 
+    - target: default
+  artifactName: ${productName}.${ext}
