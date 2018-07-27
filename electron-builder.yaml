@@ -4,6 +4,9 @@ files:
   - index.js
   - build/**/*
   - src/main-process/**/*
+publish: 
+  provider: github
+  releaseType: draft
 win:
   target: 
     - target: nsis
