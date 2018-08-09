@@ -1,18 +1,26 @@
 const downloader = require('./downloader/downloader');
 const ipcManager = require('./ipc-manager/ipc-manager');
+const { BrowserWindow } = require('electron');
 
-const downloaderConfig = {
-  reddit: {
-    subreddit: 'wallpapers',
-    totalImages: 20
-  }
-}
+//auto download via command line
+const args = process.argv.join(',');
+const autodownloadEnabled = args.includes('autodownload');
+console.log(args);
 
-// triggered by the renderer (UI)
-ipcManager.onDownloadItems = async () => downloader.fetch(downloaderConfig);
+// Triggered by the renderer (UI)
+ipcManager.onDownloadItems = async (downloaderConfig) => downloader.fetch(downloaderConfig);
 
-// triggered when a image is downloaded
+// Triggered when a image is downloaded
 downloader.onItemDownloaded = filename => {
   console.log(filename);
   ipcManager.itemDownloaded(filename);
+}
+
+downloader.finishDownloads = () => {
+  if(autodownloadEnabled)
+    setTimeout(() => BrowserWindow.getFocusedWindow().close(), 1500);
+}
+
+if (autodownloadEnabled) {
+  setTimeout(() => ipcManager.autoDownload(), 1500);
 }

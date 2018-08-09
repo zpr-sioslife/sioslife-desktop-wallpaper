@@ -4,9 +4,10 @@ const { download } = require('electron-dl');
 const fs = require('fs-extra');
 const path = require('path');
 
-const fetch = async ({reddit: {subreddit, totalImages}}) => {
+const fetch = async ({ reddit: { subreddit, totalImages } }) => {
   const redditFetcher = fetcher.reddit(subreddit, totalImages);
   const redditImages = await redditFetcher.getImages();
+
   await downloadItems(redditImages);
 }
 
@@ -17,7 +18,7 @@ const downloadItems = async (items) => {
   await fs.remove(downloadLocation);
 
   const promises = items.map(async item => {
-    download(window, item.url, {
+    await download(window, item.url, {
       saveAs: false,
       directory: downloadLocation,
     })
@@ -28,12 +29,18 @@ const downloadItems = async (items) => {
       .catch(console.error)
   });
 
-  await Promise.all(promises);
+  Promise.all(promises)
+    .then(() => {
+      if (downloader.finishDownloads)
+        downloader.finishDownloads();
+    })
+    .catch((err) => console.log(err));
 }
 
 const downloader = {
   fetch: fetch,
-  onItemDownloaded: null
+  onItemDownloaded: null,
+  finishDownloads: null
 }
 
 module.exports = downloader;
