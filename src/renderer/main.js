@@ -41,7 +41,7 @@ const init = () => {
   // Triggered by the main-process (electron)
   ipcRenderer.on('item-downloaded', (event, filename) => {
     console.log(filename);
-    // createLogLine(filename);
+    createLogLine(filename);
   });
 
   // Triggered by the main-process (electron)
