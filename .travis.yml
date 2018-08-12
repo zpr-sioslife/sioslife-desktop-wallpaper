@@ -38,7 +38,6 @@ env:
 branches:
   only:
     - master
-    - development
 
 # Travis-drive upload of binary artifacts (approach #1)
 # addons:
