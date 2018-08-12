@@ -41,7 +41,7 @@ const init = () => {
   // Triggered by the main-process (electron)
   ipcRenderer.on('item-downloaded', (event, filename) => {
     console.log(filename);
-    createLogLine(filename);
+    createImagePreview(filename);
   });
 
   // Triggered by the main-process (electron)
@@ -58,6 +58,14 @@ const init = () => {
     divEl.appendChild(divContent);
 
     logElem.appendChild(divEl);
+  }
+
+  const createImagePreview = url => {
+    const imgEl = document.createElement('img');
+    imgEl.className = "img-preview";
+    imgEl.src = url;
+
+    logElem.appendChild(imgEl);
   }
 }
 
