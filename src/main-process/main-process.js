@@ -10,6 +10,12 @@ console.log(args);
 // Triggered by the renderer (UI)
 ipcManager.onDownloadItems = async (downloaderConfig) => downloader.fetch(downloaderConfig);
 
+// Triggered by the renderer (UI)
+ipcManager.onGetDownloadedItems = async () => {
+  const items = await downloader.getDownloadedImages();
+  ipcManager.sendDownloadedItems(items);
+}
+
 // Triggered when a image is downloaded
 downloader.onItemDownloaded = filename => {
   console.log(filename);

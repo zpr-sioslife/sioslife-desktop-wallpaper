@@ -3,6 +3,9 @@ const fetcher = require('../fetcher/fetcher');
 const { download } = require('electron-dl');
 const fs = require('fs-extra');
 const path = require('path');
+const glob = require('fast-glob');
+
+const downloadLocation = path.join(app.getPath('pictures'), 'sioslife-desktop-wallpaper');
 
 const fetch = async ({ reddit: { subreddit, totalImages } }) => {
   const redditFetcher = fetcher.reddit(subreddit, totalImages);
@@ -11,8 +14,8 @@ const fetch = async ({ reddit: { subreddit, totalImages } }) => {
   await downloadItems(redditImages);
 }
 
+//items: [{title, url}, {title, url}, ..]
 const downloadItems = async (items) => {
-  const downloadLocation = path.join(app.getPath('pictures'), 'sioslife-desktop-wallpaper');
   const window = BrowserWindow.getFocusedWindow();
 
   await fs.remove(downloadLocation);
@@ -37,8 +40,14 @@ const downloadItems = async (items) => {
     .catch((err) => console.log(err));
 }
 
+const getDownloadedImages = async () => {
+  const imagePaths = await glob(downloadLocation + '/*.{png,jpg}');
+  return imagePaths;
+}
+
 const downloader = {
   fetch: fetch,
+  getDownloadedImages: getDownloadedImages,
   onItemDownloaded: null,
   finishDownloads: null
 }

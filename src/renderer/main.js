@@ -67,6 +67,13 @@ const init = () => {
 
     logElem.appendChild(imgEl);
   }
+ 
+  // Doesn't feel right
+  // ipcRenderer.send("get-downloaded-items");
+  // ipcRenderer.on('send-downloaded-items', (event, items) => {
+  //   console.log(items);
+  //   items.forEach(item => createImagePreview(item));
+  // });
 }
 
 window.onload = init;
