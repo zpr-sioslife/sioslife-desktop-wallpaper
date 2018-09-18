@@ -1,8 +1,7 @@
 productName: SiosDeskPaper
-asar: false
+asar: true
 files:
   - build/**/*
-  - .env
 publish: 
   provider: github
   releaseType: draft

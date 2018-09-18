@@ -1,17 +1,13 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import nodquire from './node-require';
 
-const nodeProcess = window.nodeRequire('process');
-const path = window.nodeRequire('path');
+const nodeProcess = nodquire('process');
+const path = nodquire('path');
 const isDev = window.isDev;
 
-const result = window.nodeRequire('dotenv')
-  .config({
-    path: isDev ? 
-    path.join(nodeProcess.cwd(), '.env') : 
-    path.join(nodeProcess.cwd(), 'resources/app', '.env')
-  });
+const result = nodquire('dotenv').config();
 
 class App extends Component {
   render() {
@@ -27,6 +23,7 @@ class App extends Component {
         <hr/>
         React NODE_ENV: {process.env.NODE_ENV}<br/>
         Electron: {nodeProcess.versions.electron}<br/>
+        Electron isDev: {isDev.toString()}<br/>
         Node: {nodeProcess.version}<br/>
         Chrome: {nodeProcess.versions.chrome}<br/>
         Process Type: {nodeProcess.type}<br/>
