@@ -7,7 +7,10 @@ const isDev = process.env.ELECTRON_IS_DEV ? true : false;
 let mainWindow;
 
 function createWindow() {
-  mainWindow = new BrowserWindow({ width: isDev ? 1700 : 800, height: isDev ? 900 : 600 });
+  mainWindow = new BrowserWindow({
+    width: isDev ? 1700 : 800, height: isDev ? 900 : 600,
+    webPreferences: { preload: `${path.join(__dirname, 'preload.js')}` }
+  });
   mainWindow.loadURL(process.env.ELECTRON_START_URL || `file://${path.join(__dirname, '../build/index.html')}`);
   mainWindow.on('closed', () => mainWindow = null);
 
@@ -23,6 +26,6 @@ app.on('window-all-closed', () => {
 });
 
 app.on('activate', () => {
-  if (mainWindow === null) 
+  if (mainWindow === null)
     createWindow();
 });

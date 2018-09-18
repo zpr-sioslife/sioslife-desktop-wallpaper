@@ -1,24 +1,28 @@
 {
   "name": "sioslife-desktop-wallpaper",
   "version": "0.1.0",
-  "main": "./public/electron.js",
+  "main": "public/electron.js",
+  "homepage": "./",
   "private": true,
   "scripts": {
     "start": "npm-run-all --parallel start:*",
-    "build": "react-scripts build",
+    "build": "npm-run-all --serial build:*",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "start:react": "react-scripts start",
-    "start:electron": "electron . "
+    "start:electron": "electron . ",
+    "build:react": "react-scripts build",
+    "build:electron": "electron-builder -c.extraMetadata.main=build/electron.js"
   },
   "dependencies": {
-    "dotenv": "^6.0.0",
-    "react": "^16.5.1",
-    "react-dom": "^16.5.1",
-    "react-scripts": "1.1.5"
+    "dotenv": "^6.0.0"
   },
   "devDependencies": {
     "electron": "^2.0.9",
-    "npm-run-all": "^4.1.3"
+    "electron-builder": "^20.28.4",
+    "npm-run-all": "^4.1.3",
+    "react": "^16.5.1",
+    "react-dom": "^16.5.1",
+    "react-scripts": "1.1.5"
   }
 }
