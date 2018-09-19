@@ -15,18 +15,18 @@ matrix:
       services: docker
       # even though we don't build anything in the "docker" mode, it's best to define the language as node_js
       # so that we can manipulate node_modules if needed
-      language: node_js
-      # # nodejs version as per example in https://github.com/develar/onshape-desktop-shell/blob/master/.travis.yml
-      node_js: 8
-      # env: 
-      #   - DEBUG=electron-builder
+      language: generic
+      env: 
+        # - NODE_ENV=production # https://stackoverflow.com/questions/38083622/why-travis-ci-no-run-npm-install-in-node-env-production
+        # - DEBUG=electron-builder
       
     - os: osx
-      osx_image: xcode9.0
+      osx_image: xcode9.4
       language: node_js
       # # nodejs version as per example in https://github.com/develar/onshape-desktop-shell/blob/master/.travis.yml
-      node_js: 8
-      # env:
+      node_js: 10
+      env:
+        # - NODE_ENV=production https://stackoverflow.com/questions/38083622/why-travis-ci-no-run-npm-install-in-node-env-production
         # - DEBUG=electron-builder
 
 env:
@@ -38,6 +38,7 @@ env:
 branches:
   only:
     - master
+    - develop
 
 # Travis-drive upload of binary artifacts (approach #1)
 # addons:
@@ -49,11 +50,11 @@ branches:
 # TRAVIS::2 (optional)
 cache:
   directories:
-    - /node_modules
+    - node_modules
     - $HOME/.cache/electron
     - $HOME/.cache/electron-builder
-    - $HOME/.npm
-    - $HOME/.yarn-cache
+    # - $HOME/.npm
+    # - $HOME/.yarn-cache
 
 # TRAVIS::3
 before_install:
@@ -79,6 +80,7 @@ before_install:
   - ls -la ${HOME}                        || true
   - ls -la ${TRAVIS_BUILD_DIR}            || true
   - ls -la ${TRAVIS_BUILD_DIR}/dist       || true
+  # - ls -la ${TRAVIS_BUILD_DIR}/node_modules || true
   - echo "########################################### 30z"
 
   # git-lfs may no be installed on travis-ci mac image
@@ -95,9 +97,9 @@ before_install:
 
   - node --version
   - time npm i -g npm@latest
-  - time npm i -g yarn@latest
+  # - time npm i -g yarn@latest
   - npm  --version
-  - yarn --version
+  # - yarn --version
 
   # # # not really necessary, as we are already in node 8
   # # - npm i -g npm@5
@@ -133,6 +135,7 @@ install:
   - ls -la ${HOME}                        || true
   - ls -la ${TRAVIS_BUILD_DIR}            || true
   - ls -la ${TRAVIS_BUILD_DIR}/app-1/dist || true
+  # - ls -la ${TRAVIS_BUILD_DIR}/node_modules || true
   - echo "########################################### 40z"
 
 # TRAVIS::5
@@ -151,8 +154,8 @@ script:
 #
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
-      docker run --rm \
-        --env-file <(env | grep -iE 'DEBUG|NODE_|ELECTRON_|YARN_|NPM_|CI|CIRCLE|TRAVIS|APPVEYOR_|CSC_|_TOKEN|_KEY|AWS_|STRIP|BUILD_') \
+      ENVS=`env | grep -iE '^(DEBUG|NODE_|ELECTRON_|NPM_|CI|TRAVIS|WIN_CSC_|CSC_|GH_|AWS_|BUILD_)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
+      docker run $ENVS --rm \
         --env ELECTRON_CACHE="/root/.cache/electron" \
         --env ELECTRON_BUILDER_CACHE="/root/.cache/electron-builder" \
         --env X_RESET_UID=$UID \
@@ -161,7 +164,7 @@ script:
         -v $HOME/.yarn-cache:/root/.yarn-cache \
         -v $HOME/.cache/electron:/root/.cache/electron \
         -v $HOME/.cache/electron-builder:/root/.cache/electron-builder \
-        ez123/docker-electron-builder-wine \
+        electronuserland/builder:wine \
         /bin/bash -c "\
             set &&\
             time ${WHAT_PACKER} run build:ci:win &&\
