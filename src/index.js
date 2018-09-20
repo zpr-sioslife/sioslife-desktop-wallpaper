@@ -1,10 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ScreensRoot from './screens/root';
 import './index.css';
-import App from './App';
-import registerServiceWorker from './registerServiceWorker';
 
-ReactDOM.render(<App />, document.getElementById('root'));
-registerServiceWorker();
-
-document.write(JSON.stringify(require('../package.json'), null, 2));
+ReactDOM.render(
+    <ScreensRoot/>, 
+    document.getElementById('root')
+);
