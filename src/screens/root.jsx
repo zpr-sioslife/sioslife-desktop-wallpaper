@@ -1,15 +1,29 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-import ScreensDownload from './download';
-import ScreensOptions from './options';
+import { LayoutDefault, LayoutClean } from '../components/Layout';
+
+import ScreensHome from './Home';
+import ScreensOptions from './Options';
+import ScreensAbout from './About';
+
+const LayoutRoute = ({ component: Component, layout: Layout, ...rest }) => (
+  <Route {...rest} render={props => (
+    <Layout>
+      <Component {...props} />
+    </Layout>
+  )} />
+)
 
 const ScreensRoot = () => (
   <Router>
-    <Switch>
-      <Route exact path="/" component={ScreensDownload} />
-      <Route path="/options" component={ScreensOptions} />
-    </Switch>
+    <Fragment>
+      <Switch>
+        <LayoutRoute path="/" exact  component={ScreensHome}     layout={LayoutDefault} />
+        <LayoutRoute path="/options" component={ScreensOptions}  layout={LayoutDefault} />
+        <LayoutRoute path="/about"   component={ScreensAbout}    layout={LayoutClean} />
+      </Switch>
+    </Fragment>
   </Router>
 );
 

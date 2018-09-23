@@ -1,1 +1,1 @@
-export default (pkg) => window.nodeRequire(pkg);
+export default pkg => window.nodeRequire(pkg);

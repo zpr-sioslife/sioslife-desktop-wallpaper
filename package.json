@@ -18,6 +18,7 @@
     "dotenv": "^6.0.0"
   },
   "devDependencies": {
+    "bulma": "^0.7.1",
     "electron": "^3.0.0",
     "electron-builder": "^20.28.4",
     "electron-devtools-installer": "^2.2.4",
