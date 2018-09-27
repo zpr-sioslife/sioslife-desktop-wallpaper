@@ -1,24 +1,15 @@
 import React, { Component, Fragment } from 'react';
-import Button from '../../components/UI/Button';
-import Text from '../../components/UI/Text';
-import './styles.css';
+import { Button } from '../../components/UI';
 
 class Download extends Component {
-  handleClick = e => { console.log('download clicked ' + e.target); }
+  handleClick = e => { console.log('download clicked: ' + e.target.innerHTML); }
 
   handleInput = e => { console.log(e.target.value); }
 
   render() {
     return (
       <Fragment>
-        <div className="columns">
-          <div className="column">
-            <Text onChange={this.handleInput}></Text>
-          </div>
-          <div className="column">
-            <Button label="download" onClick={this.handleClick}></Button>
-          </div>
-        </div>
+        <Button label="Download" onClick={this.handleClick}></Button>
       </Fragment>
     );
   }

@@ -6,7 +6,7 @@ const pkg = require('../../../../package.json');
 const Header = () => (
   <footer className="has-background-light" style={{ padding: '8px' }}>
     <div className="is-pulled-left">
-      {pkg.name} - {pkg.version}
+      <b>{pkg.name} - {pkg.version}</b>
     </div>
     <span className="is-pulled-right"><Link to="/about">About</Link></span>
   </footer>
