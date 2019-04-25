@@ -2,16 +2,16 @@ productName: SiosDeskPaper
 asar: true
 files:
   - build/**/*
-publish: 
+publish:
   provider: github
   releaseType: draft
 win:
-  target: 
+  target:
     - target: nsis
       arch: x64
   artifactName: ${productName}.${ext}
 mac:
   type: development
-  target: 
+  target:
     - target: default
   artifactName: ${productName}.${ext}

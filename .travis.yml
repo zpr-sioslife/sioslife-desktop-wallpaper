@@ -10,16 +10,15 @@
 
 matrix:
   include:
-
     - os: linux
       services: docker
       # even though we don't build anything in the "docker" mode, it's best to define the language as node_js
       # so that we can manipulate node_modules if needed
       language: generic
-      env: 
+      env:
         # - NODE_ENV=production # https://stackoverflow.com/questions/38083622/why-travis-ci-no-run-npm-install-in-node-env-production
         # - DEBUG=electron-builder
-      
+
     - os: osx
       osx_image: xcode9.4
       language: node_js
@@ -43,9 +42,9 @@ branches:
 # Travis-drive upload of binary artifacts (approach #1)
 # addons:
 #
-  # TRAVIS::1 (optional)
-  # apt:
-  #   packages:
+# TRAVIS::1 (optional)
+# apt:
+#   packages:
 
 # TRAVIS::2 (optional)
 cache:
@@ -100,13 +99,10 @@ before_install:
   # - time npm i -g yarn@latest
   - npm  --version
   # - yarn --version
-
   # # # not really necessary, as we are already in node 8
   # # - npm i -g npm@5
   # - yarn update
-
   # - cd app-1
-
   # - |
   #   if [ "${WHAT_PACKER}" == "npm" ]; then
   #     time npm rebuild
@@ -146,12 +142,12 @@ before_script:
 script:
   - echo "TRAVIS_ID>> ($TRAVIS_BUILD_NUMBER::$TRAVIS_JOB_NUMBER)($TRAVIS_BUILD_ID::$TRAVIS_JOB_ID) at:6.script"
 
-# make Windows (via docker+wine) and OSX builds
-# in the case of Windows:
-# * dump environment variables
-# * implement workaround to change all relevant files from UID=0 (root inside docker) to UID.
-#   (we could use TRAVIS_UID but UID would be available also in Mac - even though this is not so relevant)
-#
+  # make Windows (via docker+wine) and OSX builds
+  # in the case of Windows:
+  # * dump environment variables
+  # * implement workaround to change all relevant files from UID=0 (root inside docker) to UID.
+  #   (we could use TRAVIS_UID but UID would be available also in Mac - even though this is not so relevant)
+  #
   - |
     if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
       ENVS=`env | grep -iE '^(DEBUG|NODE_|ELECTRON_|NPM_|CI|TRAVIS|WIN_CSC_|CSC_|GH_|AWS_|BUILD_)([A-Z]|_)*=' | sed -n '/^[^\t]/s/=.*//p' | sed '/^$/d' | sed 's/^/-e /g' | tr '\n' ' '`
@@ -175,7 +171,7 @@ script:
         "
     else
       if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        time ${WHAT_PACKER} run build:react && ${WHAT_PACKER} run build:electron -- --publish always --mac 
+        time ${WHAT_PACKER} run build:react && ${WHAT_PACKER} run build:electron -- --publish always --mac
       fi
     fi
 
@@ -230,7 +226,6 @@ before_cache:
 #   - find $HOME/.npm                      -name "* *"          || true
 #   - find $HOME/.yarn-cache               -name "* *"          || true
 
-
 # CACHE UPLOAD HAPPENS SOMEWHERE BETWEEN ::7 and ::8
 
 # TRAVIS::8a
@@ -263,7 +258,6 @@ before_deploy:
   - ls -la ${TRAVIS_BUILD_DIR}            || true
   - ls -la ${TRAVIS_BUILD_DIR}/dist       || true
   - echo "########################################### 93z"
-
 
 # TRAVIS::10 (optional)
 # https://docs.travis-ci.com/user/deployment/
@@ -352,7 +346,6 @@ after_deploy:
 # TRAVIS::12
 after_script:
   - echo "TRAVIS_ID>> ($TRAVIS_BUILD_NUMBER::$TRAVIS_JOB_NUMBER)($TRAVIS_BUILD_ID::$TRAVIS_JOB_ID) at:12.after_script"
-
 ### examples
 # https://www.electron.build/multi-platform-build
 #   https://github.com/develar/onshape-desktop-shell/blob/master/.travis.yml

@@ -1,4 +1,4 @@
-require('dotenv').config();
+const isDev = require('./is-dev');
 
 window.nodeRequire = require;
-window.isDev = process.env.ELECTRON_IS_DEV ? true : false;
+window.__DEV__ = isDev;

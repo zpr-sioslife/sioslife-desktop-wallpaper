@@ -1,37 +1,39 @@
-require('dotenv').config();
-
 const { app, BrowserWindow } = require('electron');
 const path = require('path');
-const isDev = process.env.ELECTRON_IS_DEV ? true : false;
+const __DEV__ = require('./is-dev');
+const env = require('./env');
 
 let mainWindow;
+const basePath = __dirname;
+const preloadPath = `${path.join(basePath, 'preload.js')}`;
+const devUrlPath = `${env.ELECTRON_DEV_URL}`;
+const prodUrlPath = `file://${path.join(basePath, '../index.html')}`;
 
 function createWindow() {
   mainWindow = new BrowserWindow({
-    width: isDev ? 1700 : 800, height: isDev ? 900 : 600,
-    webPreferences: { preload: `${path.join(__dirname, 'preload.js')}` }
+    width: __DEV__ ? 1700 : 800,
+    height: __DEV__ ? 900 : 600,
+    webPreferences: {
+      nodeIntegration: false,
+      preload: preloadPath,
+    },
   });
-  mainWindow.loadURL(process.env.ELECTRON_START_URL || `file://${path.join(__dirname, '../index.html')}`);
-  mainWindow.on('closed', () => mainWindow = null);
 
-  if (isDev) {
+  mainWindow.loadURL(devUrlPath || prodUrlPath);
+  mainWindow.on('closed', () => (mainWindow = null));
+
+  if (__DEV__) {
     mainWindow.webContents.openDevTools();
-
-    const { default: installExtension, REACT_DEVELOPER_TOOLS } = require('electron-devtools-installer');
-    installExtension(REACT_DEVELOPER_TOOLS)
-      .then(name => console.log(`Added Extension:  ${name}`))
-      .catch(err => console.log('An error occurred: ', err));
+    require('./install-dev-extensions');
   }
 }
 
 app.on('ready', createWindow);
 
 app.on('window-all-closed', () => {
-  if (process.platform !== 'darwin')
-    app.quit();
+  if (process.platform !== 'darwin') app.quit();
 });
 
 app.on('activate', () => {
-  if (mainWindow === null)
-    createWindow();
+  if (mainWindow === null) createWindow();
 });

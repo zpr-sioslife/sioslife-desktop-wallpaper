@@ -1,9 +1,5 @@
-import Text from './Text';
-import Button from './Button';
-import Number from './Number';
+import InputText from './Inputs/Text';
+import InputButton from './Inputs/Button';
+import InputNumber from './Inputs/Number';
 
-export {
-	Text,
-	Button,
-	Number,
-}
+export { InputText, InputButton, InputNumber };
