@@ -1,7 +1,7 @@
 import React from 'react';
-import LayoutHeader from './Header';
-import LayoutMain from './Main';
-import LayoutFooter from './Footer';
+import LayoutHeader from './layout-header';
+import LayoutMain from './layout-main';
+import LayoutFooter from './layout-footer';
 
 const LayoutDefault = ({ children }) => (
   <>

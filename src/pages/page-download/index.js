@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { InputButton } from 'components/UI';
+import { InputButton } from 'components';
 
 class Download extends Component {
   handleClick = e => {

@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const pkg = require('../../../../package.json');
 
-const Header = () => (
+const LayoutHeader = () => (
   <footer className="has-background-light" style={{ padding: '8px' }}>
     <div className="is-pulled-left">
       <b>
@@ -16,4 +16,4 @@ const Header = () => (
   </footer>
 );
 
-export default Header;
+export default LayoutHeader;

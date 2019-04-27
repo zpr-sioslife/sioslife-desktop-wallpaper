@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import './styles.css';
 
-const Header = () => (
+const LayoutHeader = () => (
   <header>
     <div className="tabs is-toggle is-fullwidth is-large">
       <ul>
@@ -26,4 +26,4 @@ const Header = () => (
   </header>
 );
 
-export default Header;
+export default LayoutHeader;

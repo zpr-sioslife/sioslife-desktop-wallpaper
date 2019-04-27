@@ -1,5 +1,5 @@
 import React from 'react';
-import { InputText, InputNumber } from 'components/UI';
+import { InputText, InputNumber } from 'components';
 import { useInputValue } from 'utils/hooks';
 import './styles.css';
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import LayoutMain from './Main';
+import LayoutMain from './layout-main';
 
 const LayoutSimple = ({ children }) => (
   <>

@@ -1,12 +1,10 @@
 import React from 'react';
 import { HashRouter as Router, Route, Switch, Redirect } from 'react-router-dom';
-
-import { LayoutDefault, LayoutSimple } from 'components/layout';
-
-import PageDownload from 'pages/Download';
-import PageOptions from 'pages/Options';
-import PageAbout from 'pages/About';
-import PageWallpapers from 'pages/Wallpapers';
+import { LayoutDefault, LayoutSimple } from 'components';
+import PageDownload from 'pages/page-download';
+import PageOptions from 'pages/page-options';
+import PageAbout from 'pages/page-about';
+import PageWallpapers from 'pages/page-wallpapers';
 
 const LayoutRoute = ({ component: Component, layout: Layout, ...rest }) => (
   <Route
