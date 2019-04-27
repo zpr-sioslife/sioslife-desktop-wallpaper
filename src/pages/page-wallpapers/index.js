@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-class Wallpapers extends Component {
+class PageWallpapers extends Component {
   render() {
     return (
       <>
@@ -10,4 +10,4 @@ class Wallpapers extends Component {
   }
 }
 
-export default Wallpapers;
+export default PageWallpapers;

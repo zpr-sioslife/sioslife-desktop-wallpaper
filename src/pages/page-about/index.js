@@ -6,7 +6,7 @@ const { shell } = nrequire('electron');
 const openLink = () =>
   shell.openExternal('https://github.com/zpr-sioslife/sioslife-desktop-wallpaper');
 
-const About = () => (
+const PageAbout = () => (
   <>
     <Link to="/">
       <span role="img" aria-label="back">
@@ -19,4 +19,4 @@ const About = () => (
   </>
 );
 
-export default About;
+export default PageAbout;

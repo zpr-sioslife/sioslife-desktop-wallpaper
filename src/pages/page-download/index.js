@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { InputButton } from 'components';
 
-class Download extends Component {
+class PageDownload extends Component {
   handleClick = e => {
     console.log('download clicked: ' + e.target.innerHTML);
   };
@@ -15,4 +15,4 @@ class Download extends Component {
   }
 }
 
-export default Download;
+export default PageDownload;

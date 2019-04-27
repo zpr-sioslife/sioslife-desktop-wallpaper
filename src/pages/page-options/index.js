@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import DownloadSource from './components/download-source';
 
-class Options extends Component {
+class PageOptions extends Component {
   render() {
     return (
       <>
@@ -12,4 +12,4 @@ class Options extends Component {
   }
 }
 
-export default Options;
+export default PageOptions;
