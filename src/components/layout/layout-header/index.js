@@ -4,25 +4,19 @@ import './styles.css';
 
 const LayoutHeader = () => (
   <header>
-    <div className="tabs is-toggle is-fullwidth is-large">
-      <ul>
-        <li>
-          <NavLink to="/wallapers" activeClassName="is-active">
-            Wallpapers
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/download" exact activeClassName="is-active">
-            Download
-          </NavLink>
-        </li>
-        <li>
-          <NavLink to="/options" activeClassName="is-active">
-            Options
-          </NavLink>
-        </li>
-      </ul>
-    </div>
+    <nav className="tabs is-toggle is-fullwidth is-large">
+      <NavLink to="/wallapers" activeClassName="is-active">
+        Wallpapers
+      </NavLink>
+
+      <NavLink to="/download" activeClassName="is-active">
+        Download
+      </NavLink>
+
+      <NavLink to="/options" activeClassName="is-active">
+        Options
+      </NavLink>
+    </nav>
   </header>
 );
 
